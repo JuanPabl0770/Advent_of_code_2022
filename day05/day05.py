@@ -29,14 +29,19 @@ class CrateSorter():
 
             self.procedure_steps.append(input_line.split(' '))
 
-        print(self.crates)
-        print(self.procedure_steps)
-
     def run_procedure(self):
         for step in self.procedure_steps:
             for i in range(int(step[0])):
                 value = self.crates[int(step[1])].pop()
                 self.crates[int(step[2])].append(value)
+
+    def run_procedure_9001(self):
+        for step in self.procedure_steps:
+            crate_height = len(self.crates.get(int(step[1])))
+            crates_stack = self.crates.get(int(step[1]))[crate_height-int(step[0]):]
+            for i in range(int(step[0])):
+                self.crates.get(int(step[1])).pop()
+            self.crates.get(int(step[2])).extend(crates_stack)
 
     def get_top_crates(self):
         top_crates_str = ''
@@ -44,8 +49,10 @@ class CrateSorter():
             top_crates_str += self.crates.get(i+1).pop()
         return top_crates_str
 
+
 f = open('input.txt', 'r')
 crate_sorter = CrateSorter(f)
-crate_sorter.run_procedure()
+# crate_sorter.run_procedure()
+crate_sorter.run_procedure_9001()
 print(crate_sorter.get_top_crates())
 f.close()
