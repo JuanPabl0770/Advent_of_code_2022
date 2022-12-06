@@ -18,7 +18,7 @@ class CrateSorter():
                     else:
                         self.crates[crate_stack] = [input_line[i]]
 
-        while True:  # loop to iterate though procedure steps
+        while True:  # loop to iterate through procedure steps
             input_line = input.readline().strip()
             if not input_line:
                 break
